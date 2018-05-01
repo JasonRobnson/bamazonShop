@@ -23,6 +23,7 @@ connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
   start();
+ customerSearch();
 connection.end();
 });
 
@@ -32,5 +33,17 @@ function start(){
     connection.query("SELECT * FROM bamazonShop", function(err, results){
         if (err) throw err;
         console.table(results);
+          })
+   
+}
+
+function customerSearch() {
+    inquirer.prompt({
+        name: 'customerSearchId',
+        type: 'input',
+        message: "What is the ID of the product that you're looking ot buy?",
+    }).then(function(answer){
+        console.log(answer);
     })
+
 }
