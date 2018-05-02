@@ -45,7 +45,19 @@ function customerSearch() {
         message: "What is the ID of the product that you're looking ot buy?",
     }).then(function(answer){
         console.log(answer.customerSearchId);
-        return answer.customerSearchId
+        let customerProductID = answer.customerSearchId;
+        inquirer.prompt({
+            name: 'customerProductQuantity',
+            type: 'input',
+            message: "How many units of this product would you like to buy?",
+        }).then(function(answer){
+            console.log(answer.customerProductQuantity);
+            let customerProductQuant = answer.customerProductQuantity;
+            console.log(customerProductID);
+            console.log(customerProductQuant);
+
+        })
+
     })
 
 
