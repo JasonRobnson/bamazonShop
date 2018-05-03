@@ -79,12 +79,13 @@ function checkInventory (productID, productQuant) {
             // console.log(results[0].rowdatapacket);
              // console.log(results[0].RowDataPacket);
          } else {
-
-            }
-           
+             let inventoryUpdateValue = (parseInt(results[0].stock_quantity)) - productQuant
+                console.log(inventoryUpdateValue);
+               connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
+                 })
+             }
         })
-    
-}
+    }
 
 function endOrder(){
     connection.end();
