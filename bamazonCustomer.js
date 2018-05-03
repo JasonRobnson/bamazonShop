@@ -53,49 +53,31 @@ function customerSearch() {
             message: "How many units of this product would you like to buy?",
         }).then(function(answer){
             let customerProductQuant = answer.customerProductQuantity;
-            console.log(customerProductID);
-            console.log(customerProductQuant);
             checkInventory(customerProductID, customerProductQuant);
-            // deleteProductDB(customerProductID, customerProductQuant);
-            
-
-        })
+            })
 
     })
-
-
 }
 
 function checkInventory (productID, productQuant) {
     connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function(err, results){
         if (err) throw err;
-            console.log(results[0].stock_quantity);
-            // console.log(productQuant);
+            //if statements test product order quantity against customer quantity
         if (productQuant > parseInt(results[0].stock_quantity)){
              console.log("Sorry we don't have that product in Stock. Please Try Back Later");
              endOrder();
-            // endOrder();
-            // console.log(results[0].RowDataPacket)
-            // console.log(results[0].rowdatapacket);
-             // console.log(results[0].RowDataPacket);
-         } else {
+        } else {
+             //does basic arithmitc and sets stock quantity to a new variable
              let inventoryUpdateValue = (parseInt(results[0].stock_quantity)) - productQuant
-                console.log(inventoryUpdateValue);
                connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
                  })
-             }
-        })
-    }
+            }
+    })
+}
 
 function endOrder(){
     connection.end();
 }
 
-// function deleteProductDB(productID, productQuant) {
-//     connection.query(`SELECT ${productID}  FROM bamazonshop'`, function(err, results){
-//         if (err) throw err;
-//         console.log(results);
-// })
-// }
 
-// UPDATE bamazonshop SET quantity=$ WHERE prodcut_id='$'
+
