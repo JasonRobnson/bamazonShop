@@ -23,8 +23,9 @@ connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
   start();
+
  
-connection.end();
+
 });
 
 
@@ -34,6 +35,7 @@ function start(){
         if (err) throw err;
         console.table(results);
         customerSearch();
+        
           })
    
 }
@@ -44,17 +46,18 @@ function customerSearch() {
         type: 'input',
         message: "What is the ID of the product that you're looking ot buy?",
     }).then(function(answer){
-        console.log(answer.customerSearchId);
         let customerProductID = answer.customerSearchId;
         inquirer.prompt({
             name: 'customerProductQuantity',
             type: 'input',
             message: "How many units of this product would you like to buy?",
         }).then(function(answer){
-            console.log(answer.customerProductQuantity);
             let customerProductQuant = answer.customerProductQuantity;
             console.log(customerProductID);
             console.log(customerProductQuant);
+            checkInventory(customerProductID, customerProductQuant);
+            // deleteProductDB(customerProductID, customerProductQuant);
+            
 
         })
 
@@ -62,3 +65,36 @@ function customerSearch() {
 
 
 }
+
+function checkInventory (productID, productQuant) {
+    connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function(err, results){
+        if (err) throw err;
+            console.log(results[0].stock_quantity);
+            // console.log(productQuant);
+        if (productQuant > parseInt(results[0].stock_quantity)){
+             console.log("Sorry we don't have that product in Stock. Please Try Back Later");
+             endOrder();
+            // endOrder();
+            // console.log(results[0].RowDataPacket)
+            // console.log(results[0].rowdatapacket);
+             // console.log(results[0].RowDataPacket);
+         } else {
+
+            }
+           
+        })
+    
+}
+
+function endOrder(){
+    connection.end();
+}
+
+// function deleteProductDB(productID, productQuant) {
+//     connection.query(`SELECT ${productID}  FROM bamazonshop'`, function(err, results){
+//         if (err) throw err;
+//         console.log(results);
+// })
+// }
+
+// UPDATE bamazonshop SET quantity=$ WHERE prodcut_id='$'
