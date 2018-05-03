@@ -70,14 +70,29 @@ function checkInventory (productID, productQuant) {
              //does basic arithmitc and sets stock quantity to a new variable
              let inventoryUpdateValue = (parseInt(results[0].stock_quantity)) - productQuant
                connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
-                 })
+                productCostPrice(productID, productQuant);
+            })
             }
     })
+}
+
+
+
+function productCostPrice (productID, productQuant){
+    connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function(err, results){
+        if (err) throw err;
+        
+        console.log(`Your `+results[0].product_name + ` cost $`+ results[0].price + ' per item.');
+        let customerPrice = parseInt(productQuant) * parseInt(results[0].price);
+        console.log(`Your oder total is $`+ customerPrice);
+        endOrder();
+
+    })
+
 }
 
 function endOrder(){
     connection.end();
 }
-
 
 
