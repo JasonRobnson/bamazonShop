@@ -60,10 +60,7 @@ let connection = mysql.createConnection({
                     switch(answers.reportListChoices[i]) {
                         
                         case 'Products for Sale':
-                        connection.query("SELECT * FROM bamazonShop", function(err, results){
-                            if (err) throw err;
-                            console.table(results)
-                        });
+                        readInventory();
                         break;
                         
                         case 'Low Inventory':
@@ -75,7 +72,9 @@ let connection = mysql.createConnection({
                         break;
                        
                         case 'Add to existing Inventory':
+                        readInventory();
                         console.log("Let's add to the existing Inventory!")
+                        
                         break;
                        
                         case 'Add New Product':
@@ -90,3 +89,25 @@ let connection = mysql.createConnection({
   function end(){
       connection.end();
   }
+
+function readInventory (){
+    connection.query("SELECT * FROM bamazonShop", function(err, results){
+        if (err) throw err;
+        console.table(results)
+})
+}
+
+// function addInventory () {
+//     inquirer.prompt([{
+
+//         name: 'customerSearchId',
+//         type: 'input',
+//         message: "What is the ID of the product that you're looking ot buy?",
+//     }
+    
+//     ]).then(answers => {
+//         // Use user feedback for... whatever!!
+//     });
+//     connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
+// })
+// }
