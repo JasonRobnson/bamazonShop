@@ -52,37 +52,8 @@ let connection = mysql.createConnection({
             }
         }
     ]).then(answers => {
-
-        // think a potentional function for this if statement 
-        if (answers.reportListChoices.length > 1) {
-            for (let i = 0; i < answers.reportListChoices.length; i++){
-                
-                    switch(answers.reportListChoices[i]) {
-                        
-                        case 'Products for Sale':
-                        readInventory();
-                        break;
-                        
-                        case 'Low Inventory':
-                        console.log("Lets see that Low Inventory!")
-                        lowInventory();
-                        break;
-                       
-                        case 'Add to existing Inventory':
-                        readInventory();
-                        console.log("Let's add to the existing Inventory!")
-                        
-                        break;
-                       
-                        case 'Add New Product':
-                        console.log("Let's add New Products!")
-                        break;
-                    }
-            }
-        }  
-        else {
-            console.log(answers.reportListChoices[0]);
-        }     
+                // console.log(answers);
+            switchSelector(answers);   
     });
 }
 
@@ -118,3 +89,40 @@ function addInventory () {
     // connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
 // })
  }
+
+ function switchSelector (answers){
+     console.log(answers.reportListChoices);
+    if (answers.reportListChoices.length > 1){
+        for (let i = 0; i < answers.reportListChoices.length; i++){
+            switchHandler(answers.reportListChoices[i]);
+        }
+    } else {
+        switchHandler(answers.reportListChoices[0]);
+   
+        }
+}
+
+function switchHandler(answers){
+    switch(answers) {
+        
+        case 'Products for Sale':
+        readInventory();
+        break;
+        
+        case 'Low Inventory':
+        lowInventory();
+        break;
+       
+        case 'Add to existing Inventory':
+        readInventory();
+        console.log("Let's add to the existing Inventory!")
+        
+        break;
+       
+        case 'Add New Product':
+        console.log("Let's add New Products!")
+        break;
+    }
+
+}
+ 
