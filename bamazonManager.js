@@ -19,8 +19,13 @@ let connection = mysql.createConnection({
       console.log("You're connected as id " + connection.threadId);
       if (err) throw err
       start();
+      end();
   })
 
   function start() {
       console.log("You're starting the app!")
+  }
+
+  function end(){
+      connection.end();
   }

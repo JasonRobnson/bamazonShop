@@ -94,5 +94,3 @@ function productCostPrice (productID, productQuant){
 function endOrder(){
     connection.end();
 }
-
-
