@@ -19,7 +19,7 @@ let connection = mysql.createConnection({
       console.log("You're connected as id " + connection.threadId);
       if (err) throw err
       start();
-      end();
+    //   end();
   })
 
   function start() {
@@ -56,16 +56,22 @@ let connection = mysql.createConnection({
         // think a potentional function for this if statement 
         if (answers.reportListChoices.length > 1) {
             for (let i = 0; i < answers.reportListChoices.length; i++){
-                    console.log(answers.reportListChoices[i]);
-
+                
                     switch(answers.reportListChoices[i]) {
                         
                         case 'Products for Sale':
-                        console.log("Let's see the Product Sales!")
+                        connection.query("SELECT * FROM bamazonShop", function(err, results){
+                            if (err) throw err;
+                            console.table(results)
+                        });
                         break;
                         
                         case 'Low Inventory':
                         console.log("Lets see that Low Inventory!")
+                        connection.query("SELECT * FROM bamazonShop WHERE stock_quantity < 5", function(err, results){
+                            if (err) throw err;
+                            console.table(results)
+                        });
                         break;
                        
                         case 'Add to existing Inventory':
