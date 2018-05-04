@@ -23,8 +23,39 @@ let connection = mysql.createConnection({
   })
 
   function start() {
-      console.log("You're starting the app!")
-  }
+    inquirer.prompt([
+        {
+            type: 'checkbox',
+            message: 'Greetings Manager, \nWhich department reports would you like to view?',
+            name: 'reportListChoices',
+            choices:[
+                new inquirer.Separator(' = Inventory = '),
+                {
+                    name: 'Products for Sale'
+                },
+                {
+                    name: 'Low Inventory'
+                },
+                {
+                    name: 'Add to existing Inventory'
+                },
+                {
+                    name: 'Add New Product'
+                },
+            
+            ],
+            validate: function(answer){
+                if (answer.length < 1){
+                    return 'You must pick at least one report.';
+                }
+                return true; 
+            }
+        }
+    ]).then(answers => {
+        // console.log(answers.reportListChoices[0]);
+        console.log(JSON.stringify(answers, null, '  '));        
+    });
+}
 
   function end(){
       connection.end();
