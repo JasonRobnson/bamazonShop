@@ -65,10 +65,7 @@ let connection = mysql.createConnection({
                         
                         case 'Low Inventory':
                         console.log("Lets see that Low Inventory!")
-                        connection.query("SELECT * FROM bamazonShop WHERE stock_quantity < 5", function(err, results){
-                            if (err) throw err;
-                            console.table(results)
-                        });
+                        lowInventory();
                         break;
                        
                         case 'Add to existing Inventory':
@@ -82,7 +79,10 @@ let connection = mysql.createConnection({
                         break;
                     }
             }
-        }       
+        }  
+        else {
+            console.log(answers.reportListChoices[0]);
+        }     
     });
 }
 
@@ -97,17 +97,24 @@ function readInventory (){
 })
 }
 
-// function addInventory () {
-//     inquirer.prompt([{
+function  lowInventory(){
+    connection.query("SELECT * FROM bamazonShop WHERE stock_quantity < 5", function(err, results){
+        if (err) throw err;
+        console.table(results)
+})
+}
 
-//         name: 'customerSearchId',
-//         type: 'input',
-//         message: "What is the ID of the product that you're looking ot buy?",
-//     }
+function addInventory () {
+    inquirer.prompt([{
+
+        name: 'customerSearchId',
+        type: 'input',
+        message: "Please enter the item_id for the product you wish to add.",
+    }
     
-//     ]).then(answers => {
-//         // Use user feedback for... whatever!!
-//     });
-//     connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
+    ]).then(answers => {
+        console.log(answers);
+    });
+    // connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
 // })
-// }
+ }
