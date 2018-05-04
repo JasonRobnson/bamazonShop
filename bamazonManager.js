@@ -26,7 +26,7 @@ let connection = mysql.createConnection({
     inquirer.prompt([
         {
             type: 'checkbox',
-            message: 'Greetings Manager, \nWhich department reports would you like to view?',
+            message: 'Greetings Manager,\nWhich department reports would you like to view?',
             name: 'reportListChoices',
             choices:[
                 new inquirer.Separator(' = Inventory = '),
@@ -52,8 +52,32 @@ let connection = mysql.createConnection({
             }
         }
     ]).then(answers => {
-        // console.log(answers.reportListChoices[0]);
-        console.log(JSON.stringify(answers, null, '  '));        
+
+        // think a potentional function for this if statement 
+        if (answers.reportListChoices.length > 1) {
+            for (let i = 0; i < answers.reportListChoices.length; i++){
+                    console.log(answers.reportListChoices[i]);
+
+                    switch(answers.reportListChoices[i]) {
+                        
+                        case 'Products for Sale':
+                        console.log("Let's see the Product Sales!")
+                        break;
+                        
+                        case 'Low Inventory':
+                        console.log("Lets see that Low Inventory!")
+                        break;
+                       
+                        case 'Add to existing Inventory':
+                        console.log("Let's add to the existing Inventory!")
+                        break;
+                       
+                        case 'Add New Product':
+                        console.log("Let's add New Products!")
+                        break;
+                    }
+            }
+        }       
     });
 }
 
