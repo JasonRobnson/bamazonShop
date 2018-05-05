@@ -26,7 +26,7 @@ let connection = mysql.createConnection({
     inquirer.prompt([
         {
             type: 'checkbox',
-            message: 'Greetings Manager,\nWhich department reports would you like to view?',
+            message: 'Greetings Manager,\nWhich report would you like to view?\n\n',
             name: 'reportListChoices',
             choices:[
                 new inquirer.Separator(' = Inventory = '),
@@ -76,22 +76,24 @@ function  lowInventory(){
 }
 
 function addInventory () {
+   
     inquirer.prompt([{
 
         name: 'customerSearchId',
         type: 'input',
-        message: "Please enter the item_id for the product you wish to add.",
+        message: "Please enter the item_id for the product you wish to add.\n\n",
     }
     
     ]).then(answers => {
-        console.log(answers);
+        console.log(answers.customerSearchId);
+        
     });
+    
     // connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
 // })
  }
 
  function switchSelector (answers){
-     console.log(answers.reportListChoices);
     if (answers.reportListChoices.length > 1){
         for (let i = 0; i < answers.reportListChoices.length; i++){
             switchHandler(answers.reportListChoices[i]);
@@ -107,21 +109,21 @@ function switchHandler(answers){
         
         case 'Products for Sale':
         readInventory();
-        break;
+            break;
         
         case 'Low Inventory':
         lowInventory();
-        break;
+            break;
        
         case 'Add to existing Inventory':
         readInventory();
-        console.log("Let's add to the existing Inventory!")
+        setTimeout(addInventory, 1500);
         
-        break;
+            break;
        
         case 'Add New Product':
         console.log("Let's add New Products!")
-        break;
+            break;
     }
 
 }
