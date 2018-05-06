@@ -86,7 +86,6 @@ function productCostPrice (productID, productQuant){
         let customerPrice = parseInt(productQuant) * parseInt(results[0].price);
         console.log(`Your oder total is $`+ customerPrice);
         endOrder();
-
     })
 
 }

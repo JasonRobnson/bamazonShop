@@ -103,13 +103,41 @@ function addInventory () {
         
                 })
              })
-        
-       
-        
-        
     });
 }
     
+function addNewProduct() {
+    inquirer.prompt([
+    {
+        name: 'newProductDepartment',
+        type: 'input',
+        message: "Please enter the Department name that your new product will be listed too.\n\n",
+    },
+    {
+        name: 'newProductName',
+        type: 'input',
+        message: "Please enter the Name of the new product that you wish to add.\n\n",
+    },
+    {
+       name: 'newProductPrice',
+       type: 'input',
+       message: "Please enter the Price for the new product.\n"
+    },
+    {
+       name: 'newProductQuantity',
+       type: 'input',
+       message: "Please enter the stock quantity for the new product.\n"
+    }
+    
+    ]).then(answers => {
+        console.log(answers.newProductDepartment.toLowerCase());
+        console.log(answers.newProductName.toLowerCase());
+        console.log(answers.newProductPrice);
+        console.log(answers.newProductQuantity);
+    })
+
+
+};
   
  
 
@@ -142,7 +170,7 @@ function switchHandler(answers){
             break;
        
         case 'Add New Product':
-        console.log("Let's add New Products!")
+        addNewProduct();
             break;
     }
 
