@@ -79,19 +79,39 @@ function addInventory () {
    
     inquirer.prompt([{
 
-        name: 'customerSearchId',
+        name: 'inventoryId',
         type: 'input',
         message: "Please enter the item_id for the product you wish to add.\n\n",
+    },
+    {
+       name: 'inventoryQuantity',
+       type: 'input',
+       message: "Please enter the quantity number for products you would like to add.\n"
     }
     
     ]).then(answers => {
-        console.log(answers.customerSearchId);
+        let inventoryID = answers.inventoryId;
+        let updateQuantity = parseInt(answers.inventoryQuantity);
+        connection.query(`Select * from bamazonshop where item_id = ${inventoryID}`, function(err, results){
+            if (err) throw err;
+        let existingQuantity = parseInt(results[0].stock_quantity);
+        let newInventoryQuantity = updateQuantity + existingQuantity;
+                console.log(newInventoryQuantity)
+                connection.query(`UPDATE bamazonshop SET stock_quantity='${newInventoryQuantity}' Where item_id='${inventoryID}'`, function(err, results){
+                    if (err) throw err;
+                    readInventory();
+        
+                })
+             })
+        
+       
+        
         
     });
+}
     
-    // connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
-// })
- }
+  
+ 
 
  function switchSelector (answers){
     if (answers.reportListChoices.length > 1){
