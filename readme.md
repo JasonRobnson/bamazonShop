@@ -60,6 +60,10 @@ This is how the app query's the user. The 1's are simply examples of selections:
 This is an example of the checkout of this app:
 ![picture](images/BamazonCustomerCheckOutPrice.PNG)
 
+
+
+
+
 #### Handling Validations
 This is an example of how the app handles ItemId validations:
 ![picture](images/BamazonCustomerItemIdValidation.PNG)
