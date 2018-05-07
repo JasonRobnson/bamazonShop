@@ -68,7 +68,7 @@ function checkInventory(productID, productQuant) {
 
         //if statements test product order quantity against customer quantity
         if (IntegerProductQuant > parseInt(results[0].stock_quantity)) {
-            console.log("Sorry we don't have that product in Stock. Please Try Back Later");
+            console.log("Sorry we don't have enough of that product in Stock. Please Try Back Later");
             endOrder();
         } else {
             if (IntegerProductQuant < 0) {
