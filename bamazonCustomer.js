@@ -60,7 +60,7 @@ function customerSearch() {
 }
 
 function checkInventory(productID, productQuant) {
-    
+
     let IntegerProductQuant = parseInt(productQuant);
 
     connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function (err, results) {
@@ -99,28 +99,28 @@ function productCostPrice(productID, productQuant) {
     })
 
 }
+
 function itemIdValidator(productID, productQuant) {
-    connection.query('SELECT item_id FROM bamazonshop ORDER by(item_id+0) DESC', function(err, results){
+    connection.query('SELECT item_id FROM bamazonshop ORDER by(item_id+0) DESC', function (err, results) {
         if (err) throw err;
         let intProductID = parseInt(productID);
         if (intProductID > parseInt(results[0].item_id)) {
             console.log("Please chose an Item_Id listed on the table...")
             endOrder();
-            
-         }
-         else {
-             if (intProductID < parseInt(results[0].item_id)){
+
+        } else {
+            if (intProductID < parseInt(results[0].item_id)) {
                 checkInventory(productID, productQuant);
-                
-             }
+
+            }
         
-             
-         }
+
+        }
 
     })
-
 }
+
 
 function endOrder() {
     connection.end();
-}
+};

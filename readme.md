@@ -40,6 +40,9 @@ What tech is used for testing.
 
 `How to run the tests`
 
+### BamazonCustomer.js
+![picture](images/ProjectFiles.PNG)
+
 ## License
 
 What is the license used for this.
