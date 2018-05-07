@@ -97,7 +97,6 @@ function addInventory() {
             if (err) throw err;
             let existingQuantity = parseInt(results[0].stock_quantity);
             let newInventoryQuantity = updateQuantity + existingQuantity;
-            console.log(newInventoryQuantity)
             connection.query(`UPDATE bamazonshop SET stock_quantity='${newInventoryQuantity}' Where item_id='${inventoryID}'`, function (err, results) {
                 if (err) throw err;
                 readInventory();

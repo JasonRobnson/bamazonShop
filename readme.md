@@ -46,7 +46,7 @@ A view of the listed files within the folder:
 
 ![picture](images/ProjectFiles.PNG)
 
-Here is how to start this node app:
+Here is how to start the node apps:
 
 ![picture](images/howToStartBamazonCustomer.PNG)
 
@@ -71,6 +71,14 @@ This is an example of how the app handles ItemId validations:
 
 This is an example of how the app handles Quantity validations:
 ![picture](images/BamazonCustomerQuantityValidator.PNG)
+
+## BamazonManager
+
+This is an example of the BamazonManager app working:
+![picture](images/BamazonManager.PNG)
+
+This is an example of the BamazonManager app working:
+![picture](images/BamazonManagerMultipleSelections.PNG)
 
 
 
