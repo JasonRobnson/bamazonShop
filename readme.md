@@ -57,7 +57,6 @@ A snapshot of the initial inventory:
 This is how the app query's the user. The 1's are simply examples of selections:
 ![picture](images/BamazonCustomerInquirerPrompts.PNG)
 
-This is an example of the checkout of this app:
 ![picture](images/BamazonCustomerCheckOutPrice.PNG)
 
 
