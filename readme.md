@@ -41,7 +41,40 @@ What tech is used for testing.
 `How to run the tests`
 
 ### BamazonCustomer.js
+
+A view of the listed files within the folder:
+
 ![picture](images/ProjectFiles.PNG)
+
+Here is how to start this node app:
+
+![picture](images/howToStartBamazonCustomer.PNG)
+
+A snapshot of the initial inventory:
+
+![picture](images/InitialTableBamazonCustomer.PNG)
+
+This is how the app query's the user. The 1's are simply examples of selections:
+![picture](images/BamazonCustomerInquirerPrompts.PNG)
+
+This is an example of the checkout of this app:
+![picture](images/BamazonCustomerCheckOutPrice.PNG)
+
+#### Handling Validations
+This is an example of how the app handles ItemId validations:
+![picture](images/BamazonCustomerItemIdValidation.PNG)
+
+This is an example of how the app handles Quantity validations:
+![picture](images/BamazonCustomerQuantityValidator.PNG)
+
+
+
+
+
+
+
+
+
 
 ## License
 
