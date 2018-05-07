@@ -63,9 +63,6 @@ This is an example of the Checkout of this App:
 
 
 
-
-
-#### Handling Validations
 This is an example of how the app handles ItemId validations:
 ![picture](images/BamazonCustomerItemIdValidation.PNG)
 
