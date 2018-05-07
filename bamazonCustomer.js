@@ -56,32 +56,38 @@ function customerSearch() {
             checkInventory(customerProductID, customerProductQuant);
             })
 
-    })
+    }) 
 }
 
 function checkInventory (productID, productQuant) {
     connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function(err, results){
         if (err) throw err;
+        let IntegerProductQuant = parseInt(productQuant);
             //if statements test product order quantity against customer quantity
-        if (productQuant > parseInt(results[0].stock_quantity)){
+        if (IntegerProductQuant > parseInt(results[0].stock_quantity)){
              console.log("Sorry we don't have that product in Stock. Please Try Back Later");
              endOrder();
-        } else {
+        } 
+        else {
+            if (IntegerProductQuant < 0 ){
+                console.log("Sorry orders must be for 1 or more items.")
+                endOrder();
+            }
+            else {
              //does basic arithmitc and sets stock quantity to a new variable
              let inventoryUpdateValue = (parseInt(results[0].stock_quantity)) - productQuant
                connection.query(`UPDATE bamazonshop SET stock_quantity='${inventoryUpdateValue}' Where item_id='${productID}'`, function(err, results){
                 productCostPrice(productID, productQuant);
             })
-            }
-    })
+        }
+    }
+ })
 }
-
 
 
 function productCostPrice (productID, productQuant){
     connection.query(`SELECT * FROM  bamazonShop WHERE item_id = '${productID}'`, function(err, results){
         if (err) throw err;
-        
         console.log(`Your `+results[0].product_name + ` cost $`+ results[0].price + ' per item.');
         let customerPrice = parseInt(productQuant) * parseInt(results[0].price);
         console.log(`Your oder total is $`+ customerPrice);
