@@ -66,7 +66,7 @@ function readInventory() {
 }
 
 function lowInventory() {
-    connection.query("SELECT * FROM bamazonShop WHERE stock_quantity < 5", function (err, results) {
+    connection.query("SELECT * FROM bamazonShop WHERE stock_quantity <= 5", function (err, results) {
         if (err) throw err;
         if (results[0] === undefined) {
             console.log("You do not have any low inventory sir.")
