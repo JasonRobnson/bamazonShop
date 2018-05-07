@@ -53,17 +53,13 @@ function customerSearch() {
             message: "How many units of this product would you like to buy?",
         }).then(function (answer) {
             let customerProductQuant = answer.customerProductQuantity;
-            checkInventory(customerProductID, customerProductQuant);
+            itemIdValidator(customerProductID, customerProductQuant);
         })
 
     })
 }
 
 function checkInventory(productID, productQuant) {
-    let itemIdValue = Boolean(itemIdValidator(productID))
-        if (itemIdValue === false){
-            endOrder;
-        } else {
     
     let IntegerProductQuant = parseInt(productQuant);
 
@@ -89,8 +85,7 @@ function checkInventory(productID, productQuant) {
         }
     })
 }
-endOrder();
-}
+
 
 
 
@@ -104,14 +99,23 @@ function productCostPrice(productID, productQuant) {
     })
 
 }
-function itemIdValidator(productID) {
+function itemIdValidator(productID, productQuant) {
     connection.query('SELECT item_id FROM bamazonshop ORDER by(item_id+0) DESC', function(err, results){
         if (err) throw err;
-        if (productID >results[0].item_id) {
+        let intProductID = parseInt(productID);
+        if (intProductID > parseInt(results[0].item_id)) {
             console.log("Please chose an Item_Id listed on the table...")
-            return false
             endOrder();
-        }
+            
+         }
+         else {
+             if (intProductID < parseInt(results[0].item_id)){
+                checkInventory(productID, productQuant);
+                
+             }
+        
+             
+         }
 
     })
 
