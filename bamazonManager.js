@@ -19,7 +19,6 @@ let connection = mysql.createConnection({
       console.log("You're connected as id " + connection.threadId);
       if (err) throw err
       start();
-    //   end();
   })
 
   function start() {
@@ -52,7 +51,6 @@ let connection = mysql.createConnection({
             }
         }
     ]).then(answers => {
-                // console.log(answers);
             switchSelector(answers);   
     });
 }
@@ -71,7 +69,11 @@ function readInventory (){
 function  lowInventory(){
     connection.query("SELECT * FROM bamazonShop WHERE stock_quantity < 5", function(err, results){
         if (err) throw err;
-        console.table(results)
+        if(results[0] === undefined){
+            console.log("You do not have any low inventory sir.")
+        } else {
+            console.table(results);
+        }
 })
 }
 
@@ -100,7 +102,7 @@ function addInventory () {
                 connection.query(`UPDATE bamazonshop SET stock_quantity='${newInventoryQuantity}' Where item_id='${inventoryID}'`, function(err, results){
                     if (err) throw err;
                     readInventory();
-        
+                
                 })
              })
     });
@@ -130,10 +132,14 @@ function addNewProduct() {
     }
     
     ]).then(answers => {
-        console.log(answers.newProductDepartment.toLowerCase());
-        console.log(answers.newProductName.toLowerCase());
-        console.log(answers.newProductPrice);
-        console.log(answers.newProductQuantity);
+        let newProductDept = answers.newProductDepartment.toLowerCase();
+        let newProductName = answers.newProductName.toLowerCase();
+        let newProductPrice = answers.newProductPrice;
+        let newProductQuantity = answers.newProductQuantity;
+        connection.query(`INSERT INTO bamazonshop (product_name, department_name, price, stock_quantity) VALUES("${newProductName}","${newProductDept}",${newProductPrice},${newProductQuantity})`, function(err, results){
+            if (err) throw err;
+            readInventory();
+        });
     })
 
 
@@ -157,20 +163,24 @@ function switchHandler(answers){
         
         case 'Products for Sale':
         readInventory();
+        end();
             break;
         
         case 'Low Inventory':
         lowInventory();
+        end();
             break;
        
         case 'Add to existing Inventory':
         readInventory();
         setTimeout(addInventory, 1500);
+    
         
             break;
        
         case 'Add New Product':
         addNewProduct();
+
             break;
     }
 
