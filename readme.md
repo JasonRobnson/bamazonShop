@@ -25,9 +25,9 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Backend](#Backend)
- - [Node.js](https://nodejs.org/en/)
- - [MySQL](https://www.mysql.com/)
- - [Inquirer](https://www.npmjs.com/package/inquirer)
+  - [Node.js](https://nodejs.org/en/)
+  - [MySQL](https://www.mysql.com/)
+  - [Inquirer](https://www.npmjs.com/package/inquirer)
  
 - [Development Tools](#development-tools)
   - [Heroku](https://www.heroku.com/)
