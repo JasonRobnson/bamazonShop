@@ -30,9 +30,9 @@
  - [Inquirer](https://www.npmjs.com/package/inquirer)
  
 - [Development Tools](#development-tools)
- - [Heroku](https://www.heroku.com/)
- - [GitHub](https://github.com/JasonRobnson)
- - [DocToc](https://github.com/thlorenz/doctoc)
+  - [Heroku](https://www.heroku.com/)
+  - [GitHub](https://github.com/JasonRobnson)
+  - [DocToc](https://github.com/thlorenz/doctoc)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ## Installation
