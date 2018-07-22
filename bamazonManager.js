@@ -62,6 +62,7 @@ function readInventory() {
     connection.query("SELECT * FROM bamazonShop", function (err, results) {
         if (err) throw err;
         console.table(results)
+        end();
     })
 }
 
